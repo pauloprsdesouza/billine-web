@@ -4,7 +4,7 @@ interface IFormHelper<T> {
     setFormData: React.Dispatch<React.SetStateAction<T>>;
 }
 
-class FormHelper<T> {
+class GenericFormHelper<T> {
     form: React.RefObject<HTMLFormElement>;
     formData: T;
     setFormData: React.Dispatch<React.SetStateAction<T>>;
@@ -18,8 +18,6 @@ class FormHelper<T> {
     validateForm = (): boolean => {
         if (this.form.current) {
             const isValid: boolean = this.form.current.checkValidity();
-            // setIsFormValid might be a function passed in, or handled externally
-            // setIsFormValid(isValid);
 
             return isValid;
         }
@@ -33,4 +31,4 @@ class FormHelper<T> {
     };
 }
 
-export default FormHelper;
+export default GenericFormHelper;

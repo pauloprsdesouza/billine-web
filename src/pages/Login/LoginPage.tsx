@@ -4,13 +4,13 @@ import { AxiosError, AxiosResponse } from "axios";
 import { UserTokenResponse } from "../../models/Users/UserTokenResponse";
 import { AuthService } from "../../services/AuthService";
 import UserService from "../../services/UserService";
-import FormHelper from "../../helpers/FormHelper";
+import GenericFormHelper from "../../helpers/GenericFormHelper";
 
 const LoginPage: React.FC = () => {
     const [credentials, setCredentials] = useState<ISigninRequest>({ email: '', password: '' });
     const formRef = useRef<HTMLFormElement>(null);
 
-    const formHelper = new FormHelper<ISigninRequest>({
+    const formHelper = new GenericFormHelper<ISigninRequest>({
         form: formRef,
         formData: credentials,
         setFormData: setCredentials,
