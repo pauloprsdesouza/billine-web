@@ -3,11 +3,12 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import LoginPage from './pages/Login/LoginPage';
 import HomePage from './pages/Home/HomePage';
 import OrderPage from './pages/Order/OrderPage';
-import 'bootstrap/dist/css/bootstrap.min.css';
+import NavbarComponent from './components/Templates/Navbar/NavbarComponent';
 
 function App() {
   return (
     <BrowserRouter>
+      <NavbarComponent />
       <div className="container">
         <Routes>
           <Route path="/"  >

@@ -10,6 +10,7 @@ const HomePage: React.FC = () => {
 
     useEffect(() => {
         if (decodedText) {
+            console.log(decodedText)
             var qrCodeId = getPParameterFromURL(decodedText);
             if (!qrCodeId) return;
 
