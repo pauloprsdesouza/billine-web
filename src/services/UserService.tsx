@@ -1,6 +1,10 @@
-import BillineApi from "../helpers/api";
+import ApiService from "./ApiService";
 import { ISigninRequest } from "../models/Users/Signin/SigninRequest";
 
-export async function signinRequest(request: ISigninRequest) {
-    return await BillineApi.post("users/signin", request);
+class UserService {
+    async signin(request: ISigninRequest) {
+        return await ApiService.post("users/signin", request);
+    }
 }
+
+export default new UserService();

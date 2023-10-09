@@ -3,6 +3,7 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import LoginPage from './pages/Login/LoginPage';
 import HomePage from './pages/Home/HomePage';
 import OrderPage from './pages/Order/OrderPage';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 function App() {
   return (
@@ -10,8 +11,7 @@ function App() {
       <div className="container">
         <Routes>
           <Route path="/"  >
-            <Route path='' element={<LoginPage />} >
-            </Route>
+            <Route path='' element={<LoginPage />} ></Route>
             <Route path='Home' element={<HomePage />}></Route>
             <Route path='Orders' element={<OrderPage />}></Route>
           </Route>

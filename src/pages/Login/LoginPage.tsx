@@ -1,9 +1,10 @@
 import React, { useRef, useState } from "react";
-import FormHelper from "../../helpers/formHelper";
-import 'bootstrap/dist/css/bootstrap.min.css';
 import { ISigninRequest } from "../../models/Users/Signin/SigninRequest";
 import { AxiosError, AxiosResponse } from "axios";
-import { signinRequest } from "../../services/UserService";
+import { UserTokenResponse } from "../../models/Users/UserTokenResponse";
+import { AuthService } from "../../services/AuthService";
+import UserService from "../../services/UserService";
+import FormHelper from "../../helpers/FormHelper";
 
 const LoginPage: React.FC = () => {
     const [credentials, setCredentials] = useState<ISigninRequest>({ email: '', password: '' });
@@ -18,8 +19,13 @@ const LoginPage: React.FC = () => {
     function handleSignIn(event: React.FormEvent) {
         event.preventDefault();
 
-        signinRequest(credentials)
+        UserService.signin(credentials)
             .then((response: AxiosResponse) => {
+                var authService = new AuthService();
+
+                var userTokenResponse = response.data as UserTokenResponse;
+                authService.setAuthorizationToken(userTokenResponse);
+
                 window.location.href = "/home";
             }).catch((error: AxiosError) => {
 
@@ -27,7 +33,7 @@ const LoginPage: React.FC = () => {
     }
 
     return (
-        <form ref={formRef} onSubmit={handleSignIn} className='needs-validation was-validated' noValidate> 
+        <form ref={formRef} onSubmit={handleSignIn} className='needs-validation was-validated' noValidate>
             <div className="d-flex justify-content-center align-items-center" style={{ height: '100vh' }}>
                 <div className="card p-4" style={{ width: '300px' }}>
                     <h2 className="mb-4">Sign In</h2>

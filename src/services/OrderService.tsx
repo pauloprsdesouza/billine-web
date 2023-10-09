@@ -1,15 +1,19 @@
-import BillineApi from "../helpers/api";
+import ApiService from "./ApiService";
 import { IGetOrderQuery } from "../models/Orders/IGetOrderQuery";
 import { IPostOrderRequest } from "../models/Orders/IPostOrderRequest";
 
-export async function createOrder(request: IPostOrderRequest) {
-    return await BillineApi.post("orders", request);
+class OrderService {
+    async create(request: IPostOrderRequest) {
+        return await ApiService.post("orders", request);
+    }
+
+    async getByLoggeUser() {
+        return await ApiService.get("orders");
+    }
+
+    async getByQrCodeId(request: IGetOrderQuery) {
+        return await ApiService.get(`orders/${request.qrCodeId}`);
+    }
 }
 
-export async function getOrderByLoggeUser() {
-    return await BillineApi.get("orders");
-}
-
-export async function getOrderByQrCodeId(request: IGetOrderQuery) {
-    return await BillineApi.get(`orders/${request.qrCodeId}`);
-}
+export default new OrderService();
